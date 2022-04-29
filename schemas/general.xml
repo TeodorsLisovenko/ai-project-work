@@ -1,0 +1,764 @@
+<?xml version="1.0"?>
+<domain name="general" author="stefano">
+	<entities>
+		<entity name="Artifact">
+			<attributes>
+				<attribute name="name" mandatory="true" datatype="string"/>
+				<attribute name="description" mandatory="false" datatype="string"/>
+			</attributes>
+			<taxonomy>
+				<value name="Artwork"/>
+				<value name="Handicraft"/>
+				<value name="IndustrialWork">
+				<!-- value name="Software"/ -->
+				</value>
+			</taxonomy>
+		</entity>
+		<entity name="Collection">
+			<attributes>
+				<attribute name="name" mandatory="true" datatype="string"/>
+				<attribute name="acronym" mandatory="false" datatype="string"/>
+				<attribute name="entityType" mandatory="false" datatype="select">
+					<values>
+						<value name="Award"/>
+						<value name="Organization"/>
+						<value name="Component"/>
+						<value name="Device"/>
+						<value name="Document"/>
+						<value name="Event"/>
+						<value name="Person"/>
+						<value name="Place"/>
+						<value name="Software"/>
+						<value name="System"/>
+					</values>
+				</attribute>
+				<attribute name="startDate" mandatory="false" datatype="date"/>
+				<attribute name="endDate" mandatory="false" datatype="date"/>
+			</attributes>
+			<taxonomy>
+				<value name="Family"/>
+				<value name="Group"/>
+				<value name="Series"/>
+			</taxonomy>
+		</entity>
+		<entity name="ContentDescription">
+			<attributes>
+				<attribute name="name" mandatory="true" datatype="string"/>
+				<attribute name="description" mandatory="false" distinguishing="true" datatype="string"/>
+			</attributes>
+			<taxonomy>
+				<value name="Category">
+					<attributes>
+		 				<attribute name="id" mandatory="true" datatype="string"/>
+		<!-- 				<attribute name="taxonomy" mandatory="false" datatype="entity" target="Taxonomy" /> -->
+						<attribute name="taxonomy" mandatory="false" datatype="select">
+							<values>
+								<value name="DDC"/>
+								<value name="WordNet"/>
+							</values>
+						</attribute>
+					</attributes>
+					<taxonomy>
+						<value name="Concept"/>
+						<value name="Period"/>
+						<value name="Stuff"/>
+						<value name="Subject"/>
+						<value name="Trend"/>
+					</taxonomy>
+				</value>
+				<value name="Language">
+					<attributes>
+						<attribute name="name" mandatory="true" datatype="string"/>
+						<!-- attribute name="code" mandatory="true" datatype="string"/ --> <!-- prevedere i codici ISO 639-2 e ISO 639-1 https://www.loc.gov/standards/iso639-2/php/code_list.php -->
+					</attributes>
+				</value>
+				<value name="Text">
+				</value>
+				<value name="Word">
+					<attributes>
+						<attribute name="lemma" mandatory="true" datatype= "string"/>
+						<attribute name="pos" mandatory="true" datatype="string"/>
+						<attribute name="language" mandatory="false" datatype="string"/> <!-- target="language" -->
+					</attributes>
+				</value>
+			</taxonomy>
+		</entity>
+		<entity name="Device"> <!-- see Artifact -->
+			<attributes>
+				<attribute name="name" mandatory="true" datatype="string"/>
+				<attribute name="description" mandatory="false" distinguishing="true" datatype="string"/>
+				<attribute name="partNumber" mandatory="false" datatype="string"/>
+			</attributes>
+		</entity>
+		<entity name="Document">
+			<attributes>
+				<attribute name="title" mandatory="true" datatype="string"/>
+				<attribute name="id" mandatory="false" datatype="string"/>
+				<attribute name="language" mandatory="false" datatype="string"/>
+				<attribute name="edition" mandatory="false" datatype="string"/>
+				<attribute name="copyright" mandatory="false" datatype="date"/>
+				<attribute name="format" mandatory="false" datatype="string"/>
+				<attribute name="length" mandatory="false" datatype="string"/>
+				<attribute name="date" mandatory="false" distinguishing="true" datatype="date"/>
+				<attribute name="originalPrice" mandatory="false" datatype="real"/>
+			</attributes>
+			<taxonomy>
+				<value name="Audio">
+					<taxonomy>
+						<value name="Song"/>
+						<value name="Speech"/>
+					</taxonomy>
+				</value>
+				<value name="Printable">
+					<taxonomy>
+						<value name="Book"/>
+						<value name="Booklet"/>
+						<value name="Card"/>
+						<value name="DesignDiagram"/>
+						<value name="Leaflet"/>
+						<value name="Letter"/>
+						<value name="Magazine"/>
+						<value name="Manual"/>
+						<value name="Picture"/>
+						<value name="Postcard"/>
+						<value name="Poster"/>
+						<value name="Text"/>
+					</taxonomy>
+				</value>
+				<value name="Video">
+					<taxonomy>
+						<value name="Documentary"/>
+						<value name="Movie"/>
+					</taxonomy>
+				</value>
+			</taxonomy>
+		</entity>
+		<entity name="Event">
+			<attributes>
+				<attribute name="name" mandatory="true" datatype="string"/>
+				<attribute name="acronym" mandatory="false" datatype="string"/>
+                <attribute name="description" mandatory="false" datatype="string"/>
+				<attribute name="startDate" mandatory="true" datatype="date"/>
+				<attribute name="endDate" mandatory="false" datatype="date"/>
+			</attributes>
+			<taxonomy>
+				<value name="Concert"/>
+				<value name="Conference"/>
+				<value name="Fair"/>
+				<value name="HistoricalEvent"/>
+				<value name="Lecture"/>
+				<value name="Show"/>
+			</taxonomy>
+		</entity>
+		<entity name="IntellectualWork">
+			<attributes>
+				<attribute name="name" mandatory="true" datatype="string"/>
+				<attribute name="description" mandatory="false" datatype="text"/> <!-- serve? -->
+				<attribute name="role" mandatory="false" datatype="string"/>
+				<attribute name="creation" mandatory="false" datatype="date"/>
+				<attribute name="patent" mandatory="false" datatype="string"/>
+			</attributes>
+			<taxonomy>
+				<value name="Algorithm"/>
+				<value name="Approach"/>
+				<value name="Discipline"/>
+				<value name="Invention"/>
+				<value name="ProgrammingLanguage"/>
+				<value name="Standard"/>
+				<value name="Taxonomy"> <!-- ...o sotto Collection? -->
+					<attributes>
+						<attribute name="acronym" mandatory="false" datatype="string"/>
+						<attribute name="version" mandatory="false" datatype="string"/>
+					</attributes>
+				</value>
+				<value name="Technology"/>
+				<value name="Theorem"/>
+				<value name="TheoreticalModel"/>
+				<value name="WorkOfArt"/>
+			</taxonomy>
+		</entity>
+		<entity name="InternetComponent">
+			<attributes>
+				<attribute datatype="string" mandatory="false" name="description"/>
+			</attributes>
+			<taxonomy>
+				<value name="Domain">
+					<attributes>
+						<attribute datatype="entity" target="Domain" mandatory="false" name="superdomain"/>
+					</attributes>
+				</value>
+				<value name="EMail">
+					<attributes>
+						<attribute datatype="string" mandatory="true" name="username"/>
+						<attribute datatype="entity" target="Domain" mandatory="true" name="superdomain"/>
+					</attributes>
+				</value>
+				<value name="Protocol">
+					<attributes>
+						<attribute datatype="entity" target="Domain" mandatory="false" name="superdomain"/>
+					</attributes>
+				</value>
+				<value name="URL">
+					<attributes>
+						<attribute datatype="entity" target="Protocol" mandatory="false" name="superdomain"/>
+						<attribute datatype="entity" target="Domain" mandatory="true" name="superdomain"/>
+						<attribute datatype="string" mandatory="false" name="path"/>
+					</attributes>
+				</value>
+			</taxonomy>
+		</entity>
+		<entity name="Item">
+			<attributes>
+				<attribute name="serialNo" mandatory="true" datatype="string"/>
+				<attribute name="description" mandatory="false" distinguishing="true" datatype="string"/>
+				<attribute name="productionDate" mandatory="false" datatype="date"/>
+			</attributes>
+		</entity>
+		<entity name="Organization">
+			<attributes>
+				<attribute datatype="string" mandatory="false" name="acronym"/>
+				<attribute datatype="string" mandatory="true" name="name"/>
+				<attribute datatype="string" mandatory="false" name="form"/>
+				<attribute datatype="date" mandatory="false" name="foundationDate"/>
+				<attribute datatype="date" mandatory="false" name="closingDate"/>
+				<attribute datatype="string" mandatory="false" name="id"/>
+				<attribute datatype="string" mandatory="false" name="email"/>
+				<attribute datatype="string" mandatory="false" name="address"/>
+				<attribute datatype="string" mandatory="false" name="telephoneNumber"/>
+				<!-- Teodors start: -->
+				<attribute datatype="entity" mandatory="false" name="address" target="Place" />
+				<!-- Teodors end: -->
+			</attributes>
+			<taxonomy>
+				<value name="Club"/>
+				<value name="Company"/>
+				<value name="EducationalInstitution"/>
+				<value name="Government"/>
+				<value name="NonGovernmentalOrganization"/>
+				<value name="ProfessionalAssociationUnion"/>
+				<value name="Institution"/> <!-- PublicInstitution -->
+				<value name="PublicInstitution"/>
+				<value name="SubGroup"/>
+				<!-- Teodors start: -->
+                <value name="Agency"/>
+                <value name="ServiceProvider"/>
+				<!-- Teodors end: -->
+			</taxonomy>
+		</entity>
+		<entity name="Person">
+			<attributes>
+				<attribute name="surname" mandatory="true" display="true" datatype="string"/>
+				<attribute name="name" mandatory="true" display="true" datatype="string"/>
+				<attribute name="title" mandatory="false" datatype= "string"/>
+				<attribute name="knownAs" mandatory="false" display="true" datatype="string"/>
+				<attribute name="nickname" mandatory="false" datatype= "string"/>
+                <attribute name="gender" mandatory="false" datatype="select">
+                    <values>
+						<value name="M"/>
+						<value name="F"/>
+					</values>
+                </attribute>
+				<attribute name="bornIn" mandatory="false" datatype="entity" target="Place" />
+				<attribute name="birthDate" mandatory="false" datatype="date"/>
+				<attribute name="diedIn" mandatory="false" datatype="entity" target="Place" />
+				<attribute name="deathDate" mandatory="false" datatype="date"/>
+                <attribute name="nationality" mandatory="false" datatype="string"/> <!-- puo' essere multipla -->
+                <attribute name="job" mandatory="false" datatype="string"/>
+                <attribute datatype="string" mandatory="false" name="telephoneNumber"/>
+				<attribute datatype="string" mandatory="false" name="email"/>
+				<!-- Teodors start: -->
+				<attribute datatype="string" mandatory="false" name="educationLevel"/>
+					<values>
+						<value name="Kindergarden"/>
+						<value name="Primary"/>
+						<value name="Secondary"/>
+						<value name="Higher"/>
+					</values>
+				<!-- Teodors stop: -->
+			</attributes>
+		</entity>
+		<entity name="Place">
+			<attributes>
+				<attribute name="name" mandatory="true" datatype="string"/>
+				<attribute name="language" mandatory="false" datatype="string"/>
+				<attribute name="latitude" mandatory="false" datatype="real"/>
+                <attribute name="longitude" mandatory="false" datatype="real"/>
+				<attribute name="description" mandatory="false" datatype="string"/>
+				<!-- Teodors start: -->
+				<attribute name="phone" mandatory="false" datatype="string"/>
+				<attribute name="website" mandatory="false" datatype="string"/>
+				<!-- Teodors stop: -->
+			</attributes>
+			<taxonomy>
+				<value name="Administrative">
+					<taxonomy>
+						<value name="Continent"/>
+						<value name="Country"/>
+						<value name="Region/State"/>
+						<value name="Province/County"/>
+						<value name="Town"/>
+						<value name="District">
+							<attributes>
+								<attribute name="isIn" mandatory="true" datatype="entity" target="Place"/>
+							</attributes>
+						</value>
+						<value name="Road/Street/Square">
+							<attributes>
+								<attribute name="isIn" mandatory="true" datatype="entity" target="Place"/>
+							</attributes>
+						</value>
+						<value name="Address">
+							<attributes>
+								<attribute name="isIn" mandatory="true" datatype="entity" target="Place"/>
+							</attributes>
+						</value>
+					</taxonomy>
+				</value>
+				<value name="Building">
+					<taxonomy>
+						<value name="Apartment"/>
+						<value name="Castle"/>
+						<value name="Cottage"/>
+						<value name="House"/>
+						<value name="Skyscraper"/>
+						<!-- Teodors start: -->
+						<value name="Mall"/>
+						<value name="ShoppingCenter"/>
+						<value name="Office"/>
+						<value name="Farm"/>
+						<!-- Teodors end: -->
+					</taxonomy>
+				</value>
+				<value name="Geographic">
+					<!-- Teodors start: -->
+					<attributes>
+						<attribute name="habitat" mandatory="false" datatype="select">
+							<taxonomy>
+								<value name="Terrestrial"/>
+								<value name="Marine"/>
+								<value name="Desert"/>
+							</taxonomy>
+						</attribute>
+					</attributes>
+					<!-- Teodors stop: -->
+					<taxonomy>
+						<value name="Area"/>
+						<value name="Island"/>
+						<value name="Lake"/>
+						<value name="Land"/>
+						<value name="Mountain"/>
+						<value name="Peninsula"/>
+						<value name="Planet"/>
+						<value name="River"/>
+						<value name="Sea"/>
+						<value name="Valley"/>
+						<!-- Teodors start: -->
+						<value name="Coast"/>
+						<!-- Teodors stop: -->
+					</taxonomy>
+				</value>
+				<value name="Mansion"/>
+				<!-- Teodors start: -->
+				<value name="Infastructure">
+					<taxonomy>
+						<value name="Bridge"/>
+						<value name="Dam"/>
+						<value name="Barrage"/>
+						<value name="Aqueduct"/>
+						<value name="Port"/>
+					</taxonomy>
+				<!-- Teodors end: -->
+				</value>
+			</taxonomy>
+		</entity>
+		<entity name="ProcessComponent">
+			<attributes>
+				<attribute datatype="string" mandatory="true" name="name"/>
+			</attributes>
+			<taxonomy>
+				<value name="Activity">
+					<attributes>
+						<attribute datatype="date" mandatory="true" name="dateTimeStart"/>
+						<attribute datatype="date" mandatory="true" name="dateTimeEnd"/>
+						<attribute datatype="string" mandatory="true" name="contentRef"/>
+					</attributes>
+				</value>
+				<value name="Case"/>
+				<value name="Agent"/>
+				<value name="Process"/>
+				<value name="Task"/>
+			</taxonomy>
+		</entity>
+		<entity name="TemporalSpecification"> <!-- dc:TemporalSpecification --> <!-- abstract? ogni istanza deve essere una sottoclasse -->
+			<attributes>
+				<attribute name="name" mandatory="false" datatype="string"/>
+				<attribute name="description" mandatory="false" datatype="string"/>
+			</attributes>
+			<taxonomy>
+				<value name="TimeInterval">
+					<attributes>
+						<attribute name="startTime" mandatory="true" datatype="entity" target="TimePoint"/>
+						<attribute name="endTime" mandatory="true" datatype="entity" target="TimePoint"/>
+					</attributes>
+				</value>
+				<value name="Timeline"/>
+				<value name="TimePoint">
+					<attributes>
+						<attribute name="date" mandatory="false" datatype="date"/>
+					</attributes>
+					<taxonomy>
+						<value name="Year">
+							<attributes>
+								<attribute name="year" mandatory="true" datatype="integer"/>
+							</attributes>
+						</value>
+						<value name="Month">
+							<attributes>
+								<attribute name="belongsTo" mandatory="true" datatype="entity" target="Year"/>
+								<attribute name="month" mandatory="true" datatype="integer"/>
+							</attributes>
+						</value>
+						<value name="Day">
+							<attributes>
+								<attribute name="belongsTo" mandatory="true" datatype="entity" target="Month"/>
+								<attribute name="day" mandatory="true" datatype="integer"/>
+							</attributes>
+						</value>
+					</taxonomy>
+				</value>
+			</taxonomy>
+		</entity>
+		<entity name="User">
+			<attributes>
+				<attribute name="username" mandatory="true" display="true" datatype="string"/>
+				<attribute name="name" mandatory="false" display="true" datatype="string"/>
+				<attribute name="description" mandatory="false" display="true" datatype="text"/>
+				<attribute name="registrationDate" mandatory="true" datatype="date"/>
+				<attribute name="eraseDate" mandatory="false" datatype="date"/>
+			</attributes>
+			<taxonomy>
+				<value name="PersonUser"/>
+				<value name="OrganizationUser"/>
+				<value name="GroupUser"/>
+			</taxonomy>
+		</entity>
+	</entities>
+	<relationships>
+		<relationship name="adopts" inverse="adoptedBy">
+			<references>
+				<reference subject="Place" object="Language"/>
+				<reference subject="Organization" object="Language"/>
+			</references>
+		</relationship>
+		<relationship name="aliasOf" inverse="aliasOf">
+			<references>
+				<reference subject="Category" object="Category"/>
+				<reference subject="Document" object="Document"/>
+				<reference subject="Organization" object="Organization"/>
+				<reference subject="Person" object="Person"/>
+				<reference subject="Place" object="Place"/>
+				<reference subject="User" object="Person"/>
+			</references>
+			<attributes>
+				<attribute name="date" mandatory="false" datatype="date"/>
+			</attributes>
+		</relationship>
+		<relationship name="attributeOf" inverse="hasAttribute">
+			<references>
+				<reference subject="Category" object="Category"/>
+			</references>
+		</relationship>
+		<relationship name="describes" inverse="describedBy">
+			<references>
+				<reference subject="ContentDescription" object="Device"/>
+				<reference subject="ContentDescription" object="Document"/>
+				<reference subject="ContentDescription" object="Event"/>
+				<reference subject="ContentDescription" object="Person"/>
+				<reference subject="ContentDescription" object="Place"/>
+			</references>
+			<attributes>
+				<attribute name="degree" mandatory="false" datatype="integer"/> <!-- usare tipi specifici -->
+			</attributes>
+		</relationship>
+		<relationship name="belongsTo" inverse="includes">
+			<references>
+				<reference subject="Category" object="Taxonomy"/>
+				<reference subject="Collection" object="Collection"/>
+				<reference subject="Device" object="Collection"/>
+				<reference subject="Document" object="Collection"/>
+				<reference subject="Event" object="Collection"/>
+				<reference subject="Person" object="Collection"/>
+				<reference subject="Place" object="Collection"/>
+				<reference subject="TemporalSpecification" object="Timeline"/> <!-- Timeline e' Collection? -->
+			</references>
+			<attributes>
+				<attribute name="number" mandatory="false" datatype="string"/>
+				<attribute name="startDate" mandatory="false" datatype="date"/>
+				<attribute name="endDate" mandatory="false" datatype="date"/>
+			</attributes>
+		</relationship>
+		<relationship name="causes" inverse="causedBy">
+			<references>
+				<reference subject="Category" object="Category"/>
+			</references>
+		</relationship>
+		<relationship name="classifiedAs" inverse="hasClassification">
+			<references>
+				<reference subject="Category" object="Category"/>
+				<reference subject="Word" object="Word"/>
+			</references>
+		</relationship>
+		<relationship name="concerns" inverse="citedIn">
+			<references>
+				<reference subject="Category" object="Category"/> <!-- Subject Concept -->
+				<reference subject="Document" object="Category"/>
+				<reference subject="Document" object="Organization"/>
+				<reference subject="Document" object="Device"/>
+				<reference subject="Document" object="Document"/>
+				<reference subject="Document" object="IntellectualWork"/>
+				<reference subject="Document" object="Person"/>
+				<reference subject="Document" object="Place"/>
+			</references>
+			<attributes>
+				<attribute name="position" mandatory="false" datatype="string"/>
+			</attributes>
+		</relationship>
+		<relationship name="connectedTo" inverse="connectedTo">
+			<references>
+				<reference subject="Place" object="Place"/>
+			</references>
+			<attributes>
+				<attribute name="type" mandatory="false" datatype="string"/>
+			</attributes>
+		</relationship>
+		<relationship name="describes" inverse="describedBy">
+			<references>
+				<reference subject="ContentDescription" object="Device"/>
+				<reference subject="ContentDescription" object="Document"/>
+				<reference subject="ContentDescription" object="Event"/>
+				<reference subject="ContentDescription" object="Person"/>
+				<reference subject="ContentDescription" object="Place"/>
+				<reference subject="ContentDescription" object="User"/>
+				<reference subject="Person" object="Document"/>
+				<reference subject="Place" object="Document"/>
+				<reference subject="Place" object="User"/>
+			</references>
+			<attributes>
+				<attribute name="degree" mandatory="false" datatype="integer"/> <!-- usare tipi specifici -->
+			</attributes>
+		</relationship>
+		<relationship name="developed" inverse="developedBy">
+			<references>
+				<reference subject="Person" object="Collection"/>
+				<reference subject="Person" object="Document"/>
+				<reference subject="Person" object="Device"/>
+				<reference subject="Person" object="IntellectualWork"/>
+				<reference subject="Person" object="Taxonomy"/>
+				<!-- User? -->
+			</references>
+			<attributes>
+				<attribute name="role" mandatory="false" datatype="string"/>
+				<attribute name="order" mandatory="false" datatype="integer"/>
+			</attributes>
+		</relationship>
+		<relationship name="entails" inverse="entailedBy">
+			<references>
+				<reference subject="Category" object="Category"/>
+			</references>
+		</relationship>
+		<relationship name="evaluated" inverse="evaluatedBy"> <!-- va in general? -->
+			<references>
+				<reference subject="Person" object="Device"/>
+				<reference subject="Person" object="Document"/>
+				<reference subject="Person" object="Item"/>
+			</references>
+			<attributes>
+				<attribute name="value" mandatory="true" datatype="real"/>
+				<attribute name="type" mandatory="true" datatype="select">
+					<values>
+						<value name="Purchase"/>
+						<value name="Opinion"/>
+					</values>
+				</attribute>
+				<attribute name="evaluationDate" mandatory="false" datatype="date"/>
+			</attributes>
+		</relationship>
+		<relationship name="evolves" inverse="evolvedBy">
+			<references>
+				<reference subject="Device" object="Device"/>
+				<reference subject="Document" object="Document"/>
+			</references>
+		</relationship>
+		<relationship name="expresses" inverse="expressedBy">
+			<references>
+				<reference subject="Word" object="Category"/>
+				<reference subject="Word" object="Person"/> <!-- cosa intende? Se e' per etichettare la persona allora "denotes"? -->
+				<reference subject="Word" object="Place"/>
+			</references>
+		</relationship>
+		<relationship name="instanceOf" inverse="hasInstance">
+			<references>
+				<reference subject="Category" object="Category"/>
+				<reference subject="Document" object="IntellectualWork"/>
+				<reference subject="Item" object="Device"/>
+				<reference subject="Item" object="Document"/>
+				<reference subject="Place" object="Place"/> <!-- ?? -->
+			</references>
+		</relationship>
+		<relationship name="interactedWith" inverse="interactedWith">
+			<references>
+				<reference subject="Person" object="Person"/>
+			</references>
+			<attributes>
+				<attribute name="role" mandatory="false" datatype="string"/>
+				<attribute name="startDate" mandatory="false" datatype="date"/>
+				<attribute name="endDate" mandatory="false" datatype="date"/>
+			</attributes>
+		</relationship>
+		<relationship name="isA" inverse="hasSubclass">
+			<references>
+				<reference subject="Category" object="Category"/>
+				<reference subject="Device" object="Device"/>
+			</references>
+		</relationship>
+		<relationship name="knows" inverse="knownBy">
+			<references>
+				<reference subject="Person" object="Category"/>
+			</references>
+			<attributes>
+				<attribute name="role" mandatory="false" datatype="string"/>
+			</attributes>
+		</relationship>
+		<relationship name="nextTo" inverse="nextTo">
+			<references>
+				<reference subject="Place" object="Place"/>
+			</references>
+		</relationship>
+		<relationship name="owned" inverse="ownedBy">
+			<references>
+				<reference subject="Organization" object="Device"/>
+				<reference subject="Organization" object="Item"/>
+				<reference subject="Organization" object="Organization"/>
+				<reference subject="Person" object="Document"/>
+				<reference subject="Person" object="Device"/>
+				<reference subject="Person" object="Item"/>
+				<reference subject="Person" object="Place"/>
+			</references>
+			<attributes>
+				<attribute name="quantity" mandatory="false" datatype="integer"/>
+				<attribute name="startDate" mandatory="false" datatype="date"/>
+				<attribute name="endDate" mandatory="false" datatype="date"/>
+				<attribute name="public" mandatory="false" datatype="boolean"/>
+			</attributes>
+		</relationship>
+		<relationship name="partOf" inverse="hasPart">
+			<references>
+				<reference subject="Category" object="Category"/>
+				<reference subject="Document" object="Document"/>
+				<reference subject="Item" object="Device"/>
+				<reference subject="Item" object="Document"/>
+				<reference subject="Organization" object="Organization"/>
+			</references>
+            <attributes>
+                <attribute name="startDate" mandatory="true" datatype="date"/>
+				<attribute name="endDate" mandatory="false" datatype="date"/>
+				<attribute name="type" mandatory="false" datatype="sselect">
+					<values>
+						<value name="Membership"/>
+						<value name="Part"/>
+						<value name="Substance"/>
+					</values>
+				</attribute>
+			</attributes>
+		</relationship>
+		<relationship name="pertainsTo" inverse="pertainedBy">
+			<references>
+				<reference subject="Word" object="Word"/>
+			</references>
+		</relationship>
+		<relationship name="produced" inverse="producedBy">
+			<references>
+				<reference subject="Organization" object="Device"/>
+				<reference subject="Organization" object="Document"/>
+			</references>
+			<attributes>
+				<attribute name="role" mandatory="false" datatype="string" />
+				<attribute name="place" mandatory="false" datatype="entity" target="Place" />
+				<attribute name="presentationDate" mandatory="false" datatype="date"/>
+				<attribute name="startDate" mandatory="false" datatype="date"/>
+				<attribute name="endDate" mandatory="false" datatype="date"/>
+			</attributes>
+		</relationship>
+		<relationship name="relatedTo" inverse="relatedTo">
+			<references>
+				<reference subject="Category" object="Category"/>
+			</references>
+		</relationship>
+		<relationship name="relevantFor" inverse="pertains"> <!-- = describes? fondere? -->
+			<references>
+				<reference subject="Document" object="Category"/> <!-- Category.relevantFor.Document ? -->
+				<reference subject="Event" object="Category"/>
+				<reference subject="Place" object="Category"/>
+				<reference subject="Person" object="Category"/>
+				<reference subject="Category" object="Event"/>
+				<reference subject="Category" object="Place"/>
+				<reference subject="Category" object="Person"/>
+				<reference subject="Category" object="User"/>
+			</references>
+            <attributes>
+				<attribute name="startDate" mandatory="false" datatype="date"/>
+				<attribute name="endDate" mandatory="false" datatype="date"/>
+				<attribute name="range" mandatory="true" datatype="integer"/>
+			</attributes>
+		</relationship>
+		<relationship name="requires" inverse="requiredBy">
+			<references>
+				<reference subject="IntellectualWork" object="IntellectualWork"/>
+			</references>
+		</relationship>
+		<relationship name="seeAlso" inverse="seeAlso">
+			<references>
+				<reference subject="Word" object="Word"/>
+			</references>
+		</relationship>
+		<relationship name="similarMeaningAs" inverse="similarMeaningAs"> <!-- assorbire in similarTo ? -->
+			<references>
+				<reference subject="Category" object="Category"/>
+			</references>
+		</relationship>
+		<relationship name="similarTo" inverse="similarTo">
+			<references>
+				<reference subject="Category" object="Category"/>
+			</references>
+		</relationship>
+		<relationship name="wasIn" inverse="hosted">
+			<references>
+				<reference subject="Collection" object="Event"/> <!-- Group (gruppo di persone) -->
+				<reference subject="Collection" object="Place"/> <!-- Group (gruppo di persone) -->
+				<reference subject="Organization" object="Event"/>
+				<reference subject="Organization" object="Place"/>
+				<reference subject="Device" object="Event"/>
+				<reference subject="Document" object="Event"/>
+				<reference subject="Document" object="Place"/>
+				<reference subject="Event" object="Event"/>
+				<reference subject="Event" object="Place"/>
+				<reference subject="Item" object="Place"/>
+				<reference subject="Person" object="Collection"/> <!-- belongsTo? ma ci sono istanze -->
+				<reference subject="Person" object="Event"/>
+				<reference subject="Person" object="Organization"/>
+				<reference subject="Person" object="Place"/>
+				<reference subject="Place" object="Collection"/> <!-- belongsTo? verificare se ci sono istanze -->
+				<reference subject="Place" object="Place"/>
+				<reference subject="User" object="Event"/>
+				<reference subject="User" object="User"/>
+			</references>
+			<attributes>
+				<attribute name="role" mandatory="false" datatype="string"/>
+				<attribute name="reason" mandatory="false" datatype="string"/>
+				<attribute name="address" mandatory="false" datatype="string"/>
+				<attribute name="startDate" mandatory="false" datatype="date"/>
+				<attribute name="endDate" mandatory="false" datatype="date"/>
+			</attributes>
+		</relationship>
+	</relationships>
+</domain>

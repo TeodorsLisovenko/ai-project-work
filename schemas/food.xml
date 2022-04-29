@@ -1,0 +1,507 @@
+<?xml version="1.0"?>
+<domain name="food">
+	<entities>
+		<entity name="FoodBeverage">
+			<attributes>
+				<attribute name="name" mandatory="true" datatype="string" />
+				<attribute name="description" mandatory="false" datatype="string" />
+				<!-- Teodors start: -->
+				<attribute name="placeOfOrigin" mandatory="false" datatype="entity" target="Place" />
+				<attribute name="cuisine" mandatory="false" datatype="string" />
+				<!-- Teodors stop: -->
+			</attributes>
+			<taxonomy>
+				<value name="Food" />
+				<value name="Beverage" />
+				<attributes>
+					<attribute name="isAlcoholic" mandatory="true" datatype="boolean" />
+				</attributes>
+			</taxonomy>
+		</entity>
+		<!-- Teodors start: -->
+		<entity name="Characteristic">
+			<taxonomy>
+				<value name="Flavor">
+					<taxonomy>
+						<value name="Spicy" />
+						<value name="Sweet" />
+						<value name="Bitter" />
+						<value name="Nutty" />
+						<value name="Salty" />
+						<value name="Smoky" />
+						<value name="Tart" />
+						<value name="Soar" />
+						<value name="Earthy" />
+						<value name="Floral" />
+						<value name="Acid" />
+						<value name="Umami" />
+						<value name="Other" />
+					</taxonomy>
+				</value>
+				<value name="Texture">
+					<taxonomy>
+						<value name="Mushy" />
+						<value name="Creamy" />
+						<value name="Crumbly" />
+						<value name="Cruncy" />
+						<value name="Gooey" />
+						<value name="Greasy" />
+						<value name="Moist" />
+						<value name="Sticky" />
+						<value name="Grainy" />
+						<value name="Rubbery" />
+						<value name="Slippery" />
+						<value name="Firm" />
+						<value name="Mealy" />
+						<value name="Chewy" />
+						<value name="Powdery" />
+						<value name="Other" />
+					</taxonomy>
+				</value>
+				<value name="State">
+					<taxonomy>
+						<value name="Liquid" />
+						<value name="Semiliquid" />
+						<value name="Solid" />
+						<value name="Semisolid" />
+						<value name="Other" />
+					</taxonomy>
+				</value>
+				<value name="Type">
+					<taxonomy>
+						<value name="Generic" />
+						<value name="Casual" />
+						<value name="FastFood" />
+						<value name="StreetFood" />
+						<value name="Vegetarian" />
+						<value name="Vegan" />
+						<value name="Halal" />
+						<value name="Kosher" />
+						<value name="Other" />
+					</taxonomy>
+				</value>
+			</taxonomy>
+		</entity>
+		<entity name="Processing">
+			<taxonomy>
+				<value name="Cooking">
+					<taxonomy>
+						<value name="Boiling" />
+						<value name="Grilling" />
+						<value name="Roasting" />
+						<value name="Baking" />
+						<value name="MoistHeat" />
+						<value name="DryHeat" />
+						<value name="HeatingContainer" />
+						<value name="Microwave" />
+						<value name="ScaldingOrBlanching" />
+						<value name="Reheating" />
+						<value name="WithOilOrFat" />
+						<value name="Sauteing" />
+						<value name="Slimmering" />
+						<value name="Broiling" />
+						<value name="Steaming" />
+						<value name="Braising" />
+						<value name="Stewing" />
+						<value name="Other" />
+					</taxonomy>
+				</value>
+				<value name="Preservation">
+					<taxonomy>
+						<value name="Heating" />
+						<value name="AddingSpicesOrExtracts" />
+						<value name="Chilling" />
+						<value name="AddingChemicals" />
+						<value name="Freezing" />
+						<value name="Filtration" />
+						<value name="Irradiation" />
+						<value name="Sticky" />
+						<value name="Fermentation" />
+						<value name="HighPressure" />
+						<value name="StoringInModifiedAtmosphere" />
+						<value name="Drying" />
+						<value name="Other" />
+					</taxonomy>
+				</value>
+			</taxonomy>
+		</entity>
+		<entity name="Recipe">
+			<attributes>
+				<attribute name="name" mandatory="true" datatype="string" />
+				<attribute name="description" mandatory="false" datatype="string" />
+				<attribute name="hasCookingTemprature" mandatory="false" datatype="integer" />
+				<attribute name="hasCookingTime" mandatory="false" datatype="integer" />
+			</attributes>
+		</entity>
+		<!-- Teodors stop: -->
+		<entity name="Ingredient">
+			<attributes>
+				<attribute name="name" mandatory="true" datatype="string" />
+				<!-- Teodors start: -->
+				<attribute name="placeOfOrigin" mandatory="false" datatype="entity" target="Place" />
+				<attribute name="hasGluten" mandatory="false" datatype="boolean" />
+				<attribute name="glycemicIndex" mandatory="false" datatype="integer" />
+				<!-- Teodors stop: -->
+			</attributes>
+			<taxonomy>
+				<value name="Animal">
+					<!-- Teodors start: -->
+					<taxonomy>
+						<value name="Mammalian">
+							<taxonomy>
+								<value name="Meat">
+									<taxonomy>
+										<value name="Pork" />
+										<value name="Beef" />
+										<value name="Mutton" />
+										<value name="Veal" />
+										<value name="Chevon" />
+										<value name="Vension" />
+										<value name="Seafood" />
+									</taxonomy>
+								</value>
+								<value name="Milk" />
+							</taxonomy>
+						</value>
+						<value name="Poultry">
+							<taxonomy>
+								<value name="Meat">
+									<taxonomy>
+										<value name="Chicken" />
+										<value name="Duck" />
+										<value name="Turkey" />
+										<value name="Goose" />
+										<value name="Pigeon" />
+									</taxonomy>
+								</value>
+								<value name="Egg" />
+							</taxonomy>
+						</value>
+					</taxonomy>
+				</value>
+				<value name="Fungus">
+					<taxonomy>
+						<value name="Mashroom" />
+						<value name="Yeast" />
+						<value name="Algea" />
+					</taxonomy>
+				</value>
+				<value name="Chemical">
+					<taxonomy>
+						<value name="Additive">
+							<taxonomy>
+								<value name="MonosoduimGlutamate" />
+								<value name="ArtificalFoodColoring" />
+								<value name="SodiumNitrite" />
+								<value name="GuarGum" />
+								<value name="HighFructoseCornSyrup" />
+								<value name="ArtificialSweeteners" />
+								<value name="ArtificialFlavoring" />
+								<value name="YeastExtract" />
+								<value name="Carrageenan" />
+								<value name="Vinegar" />
+								<value name="TransFat" />
+								<value name="XanthanGum" />
+							</taxonomy>
+						</value>
+					</taxonomy>
+				</value>
+				<value name="Vegetal">
+					<taxonomy>
+						<value name="Fruit" />
+						<value name="HerbOrSpice" />
+						<value name="Nut" />
+						<value name="Seed" />
+						<value name="Vegetable" />
+					</taxonomy>
+				</value>
+			</taxonomy>
+			<!-- Teodors stop: -->
+		</entity>
+		<entity name="Menu">
+			<attributes>
+				<attribute name="name" mandatory="true" datatype="string" />
+				<attribute name="type" mandatory="false" datatype="select">
+					<values>
+						<value name="Lunch" />
+						<value name="Dinner" />
+						<value name="Kids" />
+						<!-- Teodors start: -->
+						<value name="Brunch" />
+						<value name="Breakfast" />
+						<!-- Teodors stop: -->
+					</values>
+				</attribute>
+			</attributes>
+		</entity>
+		<entity name="MenuItem">
+			<attributes>
+				<attribute name="name" mandatory="true" datatype="string" />
+				<attribute name="description" mandatory="false" datatype="string" />
+				<attribute name="type" mandatory="false" datatype="select">
+					<values>
+						<value name="Appetizer" />
+						<value name="FirstCourse" />
+						<value name="SecondCourse" />
+						<value name="SideDish" />
+						<value name="Dessert" />
+						<value name="Beverage" />
+					</values>
+				</attribute>
+				<attribute name="price" mandatory="false" datatype="real" />
+			</attributes>
+		</entity>
+		<entity name="Nutrient">
+			<attributes>
+				<attribute name="name" mandatory="true" datatype="string" />
+				<attribute name="type" mandatory="false" datatype="select">
+					<values>
+						<value name="Carbohydrate" />
+						<value name="Lipid" />
+						<value name="MineralSalt" />
+						<value name="Protein" />
+						<value name="Sugar" />
+						<value name="Vitamin" />
+					</values>
+				</attribute>
+			</attributes>
+		</entity>
+		<entity name="Person">
+			<attributes>
+				<attribute name="surname" mandatory="true" display="true" datatype="string" />
+				<attribute name="name" mandatory="true" display="true" datatype="string" />
+				<attribute name="knownAs" mandatory="false" display="true" datatype="string" />
+				<attribute name="nickname" mandatory="false" datatype="string" />
+				<attribute name="gender" mandatory="false" datatype="select">
+					<values>
+						<value name="M" />
+						<value name="F" />
+					</values>
+				</attribute>
+				<attribute name="bornIn" mandatory="false" datatype="entity" target="Place" />
+				<attribute name="birthDate" mandatory="false" datatype="date" />
+				<attribute name="diedIn" mandatory="false" datatype="entity" target="Place" />
+				<attribute name="deathDate" mandatory="false" datatype="date" />
+				<attribute name="nationality" mandatory="false" datatype="string" />
+				<attribute name="job" mandatory="false" datatype="string" />
+			</attributes>
+		</entity>
+		<entity name="Place">
+			<attributes>
+				<attribute name="name" mandatory="true" datatype="string" />
+				<attribute name="language" mandatory="false" datatype="string" />
+				<attribute name="latitude" mandatory="false" datatype="real" />
+				<attribute name="longitude" mandatory="false" datatype="real" />
+				<attribute name="description" mandatory="false" datatype="string" />
+			</attributes>
+			<taxonomy>
+				<value name="Administrative">
+					<taxonomy>
+						<value name="Continent" />
+						<value name="Country" />
+						<value name="Region/State" />
+						<value name="Province/County" />
+						<value name="Town" />
+						<value name="District">
+							<attributes>
+								<attribute name="isIn" mandatory="true" datatype="entity" target="Place" />
+							</attributes>
+						</value>
+						<value name="Road/Street/Square">
+							<attributes>
+								<attribute name="isIn" mandatory="true" datatype="entity" target="Place" />
+							</attributes>
+						</value>
+						<value name="Address">
+							<attributes>
+								<attribute name="isIn" mandatory="true" datatype="entity" target="Place" />
+							</attributes>
+						</value>
+					</taxonomy>
+				</value>
+				<value name="Building">
+					<taxonomy>
+						<value name="Apartment" />
+						<value name="Castle" />
+						<value name="Cottage" />
+						<value name="House" />
+						<value name="Skyscraper" />
+					</taxonomy>
+				</value>
+				<value name="Geographic">
+					<taxonomy>
+						<value name="Area" />
+						<value name="Island" />
+						<value name="Lake" />
+						<value name="Land" />
+						<value name="Mountain" />
+						<value name="Peninsula" />
+						<value name="Planet" />
+						<value name="River" />
+						<value name="Sea" />
+						<value name="Valley" />
+					</taxonomy>
+				</value>
+				<value name="Mansion" />
+			</taxonomy>
+		</entity>
+		<entity name="PointOfInterest">
+			<attributes>
+				<attribute name="name" mandatory="true" datatype="string" />
+				<attribute name="description" mandatory="false" datatype="text" />
+				<attribute name="estimatedCost" mandatory="false" datatype="real" />
+				<attribute name="noOfSeats" mandatory="false" datatype="integer" />
+			</attributes>
+			<taxonomy>
+				<value name="Service">
+					<taxonomy>
+						<value name="Hotel" />
+						<value name="Restaurant">
+							<attributes>
+								<attribute name="type" mandatory="false" datatype="string" />
+								<attribute name="kind" mandatory="false" datatype="string" />
+							</attributes>
+						</value>
+					</taxonomy>
+				</value>
+			</taxonomy>
+		</entity>
+		<entity name="User">
+			<attributes>
+				<attribute name="username" mandatory="true" display="true" datatype="string" />
+				<attribute name="name" mandatory="false" display="true" datatype="string" />
+				<attribute name="description" mandatory="false" display="true" datatype="text" />
+				<attribute name="registrationDate" mandatory="true" datatype="date" />
+				<attribute name="eraseDate" mandatory="false" datatype="date" />
+			</attributes>
+			<taxonomy>
+				<value name="PersonUser" />
+				<value name="OrganizationUser" />
+				<value name="GroupUser" />
+			</taxonomy>
+		</entity>
+	</entities>
+	<relationships>
+		<relationship name="associatesWith" inverse="associatesWith">
+			<references>
+				<reference subject="FoodBeverage" object="FoodBeverage" />
+				<reference subject="Ingredient" object="FoodBeverage" />
+				<reference subject="Ingredient" object="Ingredient" />
+				<!-- Teodors start: -->
+				<reference subject="Recipe" object="MenuItem" />
+				<reference subject="Recipe" object="Ingredient" />
+				<!-- Teodors stop: -->
+			</references>
+		</relationship>
+		<relationship name="dislikes" inverse="dislikedBy">
+			<references>
+				<reference subject="User" object="FoodBeverage" />
+				<reference subject="User" object="Ingredient" />
+				<reference subject="User" object="MenuItem" />
+			</references>
+			<attributes>
+				<attribute name="reason" mandatory="false" datatype="select">
+					<values>
+						<value name="Intolerance" />
+						<value name="Taste" />
+					</values>
+				</attribute>
+			</attributes>
+		</relationship>
+		<!-- Teodors start: -->
+		<relationship name="causeAllergyTo" inverse="isAllergicTo">
+			<references>
+				<reference subject="Person" object="FoodBeverage" />
+				<reference subject="Person" object="Ingredient" />
+				<reference subject="Person" object="MenuItem" />
+			</references>
+		</relationship>
+		<relationship name="hasCharacteristic" inverse="characteristicOf">
+			<references>
+				<reference subject="Characteristic" object="FoodBeverage" />
+				<reference subject="Characteristic" object="Ingredient" />
+				<reference subject="Characteristic" object="MenuItem" />
+			</references>
+			<attributes>
+				<attribute name="kind" mandatory="false" datatype="select" />
+				<values>
+					<value name="Flavor" />
+					<value name="Texture" />
+					<value name="State" />
+					<value name="Type" />
+				</values>
+			</attributes>
+		</relationship>
+		<relationship name="hadProcessedBy" inverse="processingAppliedTo">
+			<references>
+				<reference subject="Processing" object="FoodBeverage" />
+				<reference subject="Processing" object="Ingredient" />
+				<reference subject="Processing" object="MenuItem" />
+			</references>
+			<attributes>
+				<attribute name="kind" mandatory="false" datatype="select" />
+				<values>
+					<value name="Cooking" />
+					<value name="Preservation" />
+				</values>
+			</attributes>
+		</relationship>
+		<relationship name="substitutesFor" inverse="substitutesFor">
+			<references>
+				<reference subject="FoodBeverage" object="FoodBeverage" />
+				<reference subject="Ingredient" object="Ingredient" />
+			</references>
+		</relationship>
+		<!-- Teodors stop: -->
+		<relationship name="instanceOf" inverse="hasInstance">
+			<references>
+				<reference subject="MenuItem" object="FoodBeverage" />
+			</references>
+		</relationship>
+		<relationship name="interestedIn" inverse="interests">
+			<references>
+				<reference subject="User" object="FoodBeverage" />
+				<reference subject="User" object="Ingredient" />
+				<reference subject="User" object="MenuItem" />
+			</references>
+		</relationship>
+		<relationship name="isA" inverse="kindOf">
+			<references>
+				<reference subject="FoodBeverage" object="FoodBeverage" />
+				<reference subject="Ingredient" object="Ingredient" />
+				<reference subject="MenuItem" object="FoodBeverage" />
+			</references>
+		</relationship>
+		<relationship name="partOf" inverse="hasPart">
+			<references>
+				<reference subject="Ingredient" object="FoodBeverage" />
+				<reference subject="Ingredient" object="Ingredient" />
+				<reference subject="Ingredient" object="MenuItem" />
+				<reference subject="MenuItem" object="Menu" />
+				<reference subject="Nutrient" object="Ingredient" />
+			</references>
+		</relationship>
+		<relationship name="proposes" inverse="proposedBy">
+			<references>
+				<reference subject="PointOfInterest" object="Menu" />
+			</references>
+		</relationship>
+		<relationship name="typicalOf" inverse="hasTypical">
+			<references>
+				<reference subject="FoodBeverage" object="Place" />
+				<reference subject="Ingredient" object="Place" />
+			</references>
+		</relationship>
+		<relationship name="wasIn" inverse="hosted">
+			<references>
+				<reference subject="Person" object="PointOfInterest" />
+				<reference subject="PointOfInterest" object="Place" />
+				<reference subject="User" object="PointOfInterest" />
+			</references>
+			<attributes>
+				<attribute name="reason" mandatory="false" datatype="string" />
+				<attribute name="date" mandatory="false" datatype="date" />
+			</attributes>
+		</relationship>
+	</relationships>
+</domain>
